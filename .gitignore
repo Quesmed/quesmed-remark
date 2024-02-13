@@ -6,5 +6,6 @@
 !.yarn/sdks
 !.yarn/versions
 
+yarn-error
 node_modules
 dist
