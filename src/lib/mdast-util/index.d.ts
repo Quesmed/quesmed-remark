@@ -1,9 +1,6 @@
-import {
-  ConstructNameMap,
-  ConstructNameMap as OrgConstructNameMap,
-} from "mdast-util-to-markdown";
+import { ConstructNameMap, ConstructNameMap as OrgConstructNameMap } from 'mdast-util-to-markdown';
 
-declare module "mdast-util-to-markdown" {
+declare module 'mdast-util-to-markdown' {
   interface ConstructNameMap extends OrgConstructNameMap {
     /**
      * Whole strikethrough.
@@ -13,7 +10,7 @@ declare module "mdast-util-to-markdown" {
      *     ^^^^^
      * ```
      */
-    strikethrough: "strikethrough";
+    strikethrough: 'strikethrough';
   }
   export type ConstructName = ConstructNameMap[keyof ConstructNameMap];
 }

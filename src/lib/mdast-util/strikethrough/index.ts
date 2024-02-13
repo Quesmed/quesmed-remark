@@ -1,4 +1,1 @@
-export {
-  strikethroughToMarkdown,
-  strikethroughFromMarkdown,
-} from "./lib/index.js";
+export { strikethroughFromMarkdown, strikethroughToMarkdown } from './lib/index.js';

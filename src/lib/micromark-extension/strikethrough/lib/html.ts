@@ -1,4 +1,4 @@
-import { HtmlExtension } from "micromark-util-types";
+import { HtmlExtension } from 'micromark-util-types';
 
 /**
  * Create an HTML extension for `micromark` to support GFM strikethrough when
@@ -12,12 +12,12 @@ export function strikethroughHtml(): HtmlExtension {
   return {
     enter: {
       strikethrough() {
-        this.tag("<del>");
+        this.tag('<del>');
       },
     },
     exit: {
       strikethrough() {
-        this.tag("</del>");
+        this.tag('</del>');
       },
     },
   };

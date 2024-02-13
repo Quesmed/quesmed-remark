@@ -1,29 +1,23 @@
-import { Delete, Parents } from "mdast";
+import { Delete, Parents } from 'mdast';
 import {
   CompileContext,
   Extension as FromMarkdownExtension,
   Handle as FromMarkdownHandle,
-} from "mdast-util-from-markdown";
+} from 'mdast-util-from-markdown';
 import {
   ConstructName,
-  Handle as ToMarkdownHandle,
-  Options as ToMarkdownExtension,
-  State,
   Info,
-} from "mdast-util-to-markdown";
-import { Token } from "micromark-util-types";
+  State,
+  Options as ToMarkdownExtension,
+  Handle as ToMarkdownHandle,
+} from 'mdast-util-to-markdown';
+import { Token } from 'micromark-util-types';
 
-const enterStrikethrough: FromMarkdownHandle = function (
-  this: CompileContext,
-  token: Token
-) {
-  this.enter({ type: "delete", children: [] }, token);
+const enterStrikethrough: FromMarkdownHandle = function (this: CompileContext, token: Token) {
+  this.enter({ type: 'delete', children: [] }, token);
 };
 
-const exitStrikethrough: FromMarkdownHandle = function (
-  this: CompileContext,
-  token: Token
-) {
+const exitStrikethrough: FromMarkdownHandle = function (this: CompileContext, token: Token) {
   this.exit(token);
 };
 
@@ -36,7 +30,7 @@ const exitStrikethrough: FromMarkdownHandle = function (
  */
 export const strikethroughFromMarkdown = function (): FromMarkdownExtension {
   return {
-    canContainEols: ["delete"],
+    canContainEols: ['delete'],
     enter: {
       strikethrough: enterStrikethrough,
     },
@@ -47,7 +41,7 @@ export const strikethroughFromMarkdown = function (): FromMarkdownExtension {
 };
 
 const peekDelete: ToMarkdownHandle = function () {
-  return "~";
+  return '~';
 };
 
 const handleDelete: ToMarkdownHandle & { peek: ToMarkdownHandle } = function (
@@ -57,14 +51,14 @@ const handleDelete: ToMarkdownHandle & { peek: ToMarkdownHandle } = function (
   info: Info
 ) {
   const tracker = state.createTracker(info);
-  const exit = state.enter("strikethrough");
-  let value = tracker.move("~~");
+  const exit = state.enter('strikethrough');
+  let value = tracker.move('~~');
   value += state.containerPhrasing(node, {
     ...tracker.current(),
     before: value,
-    after: "~",
+    after: '~',
   });
-  value += tracker.move("~~");
+  value += tracker.move('~~');
   exit();
   return value;
 };
@@ -79,12 +73,12 @@ handleDelete.peek = peekDelete;
  * Note: keep in sync with: <https://github.com/syntax-tree/mdast-util-to-markdown/blob/8ce8dbf/lib/unsafe.js#L14>
  */
 const constructsWithoutStrikethrough: ConstructName[] = [
-  "autolink",
-  "destinationLiteral",
-  "destinationRaw",
-  "reference",
-  "titleQuote",
-  "titleApostrophe",
+  'autolink',
+  'destinationLiteral',
+  'destinationRaw',
+  'reference',
+  'titleQuote',
+  'titleApostrophe',
 ];
 
 /**
@@ -95,8 +89,8 @@ export const strikethroughToMarkdown = function (): ToMarkdownExtension {
   return {
     unsafe: [
       {
-        character: "~",
-        inConstruct: "phrasing",
+        character: '~',
+        inConstruct: 'phrasing',
         notInConstruct: constructsWithoutStrikethrough,
       },
     ],

@@ -1,29 +1,29 @@
-import { strikethrough } from "../../../micromark-extension/strikethrough/index.js";
-import { fromMarkdown } from "mdast-util-from-markdown";
-import { strikethroughFromMarkdown, strikethroughToMarkdown } from "./index.js";
-import { toMarkdown } from "mdast-util-to-markdown";
-import { find } from "unist-util-find";
-import { Root } from "mdast";
+import { Root } from 'mdast';
+import { fromMarkdown } from 'mdast-util-from-markdown';
+import { toMarkdown } from 'mdast-util-to-markdown';
+import { find } from 'unist-util-find';
+import { strikethrough } from '../../../micromark-extension/strikethrough/index.js';
+import { strikethroughFromMarkdown, strikethroughToMarkdown } from './index.js';
 
-describe("mdast-util-strikethrough", () => {
+describe('mdast-util-strikethrough', () => {
   const cases = [
-    ["testing ~~strikethrough~~\n", "<p>testing <del>strikethrough</del></p>"],
-    ["testing ~strikethrough~\n", "<p>testing <del>strikethrough</del></p>"],
+    ['testing ~~strikethrough~~\n', '<p>testing <del>strikethrough</del></p>'],
+    ['testing ~strikethrough~\n', '<p>testing <del>strikethrough</del></p>'],
   ];
   const failCases = [
-    ["testing ~~strikethrough~\n", "<p>testing ~~strikethrough~</p>"],
-    ["testing ~strikethrough~~\n", "<p>testing ~strikethrough~~</p>"],
+    ['testing ~~strikethrough~\n', '<p>testing ~~strikethrough~</p>'],
+    ['testing ~strikethrough~~\n', '<p>testing ~strikethrough~~</p>'],
   ];
   const trees: Root[] = [];
 
-  test("fromMarkdown", () => {
+  test('fromMarkdown', () => {
     for (const [input] of cases) {
       const tree = fromMarkdown(input, {
         extensions: [strikethrough()],
         mdastExtensions: [strikethroughFromMarkdown()],
       });
       trees.push(tree);
-      const delNode = find(tree, { type: "delete" });
+      const delNode = find(tree, { type: 'delete' });
       expect(delNode).toBeTruthy();
     }
     for (const [input] of failCases) {
@@ -31,11 +31,11 @@ describe("mdast-util-strikethrough", () => {
         extensions: [strikethrough()],
         mdastExtensions: [strikethroughFromMarkdown()],
       });
-      const delNode = find(tree, { type: "delete" });
+      const delNode = find(tree, { type: 'delete' });
       expect(delNode).toBeUndefined();
     }
   });
-  test("toMarkdown", () => {
+  test('toMarkdown', () => {
     const input = cases[0][0];
     for (let i = 0; i < trees.length; i++) {
       const tree = trees[i];
