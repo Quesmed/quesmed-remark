@@ -1,0 +1,43 @@
+{
+  "name": "quesmed-remark",
+  "version": "0.0.1",
+  "description": "Set of plugins for remark used at Quesmed.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx ./src/index.ts",
+    "build": "tsc",
+    "watch": "tsx watch ./src/index.ts",
+    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" yarn jest"
+  },
+  "author": "smig88@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "devlop": "^1.1.0",
+    "mdast": "^3.0.0",
+    "mdast-util-to-markdown": "^2.1.0",
+    "micromark-util-chunked": "^2.0.0",
+    "micromark-util-classify-character": "^2.0.0",
+    "micromark-util-resolve-all": "^2.0.0",
+    "micromark-util-symbol": "^2.0.0",
+    "micromark-util-types": "^2.0.0",
+    "rehype-format": "^5.0.0",
+    "rehype-stringify": "^10.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.0",
+    "unified": "^11.0.4",
+    "unist-builder": "^4.0.0",
+    "unist-util-find": "^3.0.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.2",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  }
+}
